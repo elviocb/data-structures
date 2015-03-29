@@ -99,8 +99,29 @@ Methods.contains = function(value){
   // return the result variable
   return result;
 };
-Methods.depthFirstLog = function(){
+Methods.depthFirstLog = function(func){
 
+  // create an inner function to be used recursively
+  var recursiveFunction = function (object){
+      // Execute the callback function at the actual object
+      if (object.value !== undefined) {
+        func(object.value);
+      }
+      // check if left is not null
+      if (object.left !== null){
+        // then invoke inner function (recursion) with left parameter
+        recursiveFunction(object.left);
+      }
+      // check if right is not null
+      if (object.right !== null){
+        // then invoke inner function (recursion) with right parameter
+        recursiveFunction(object.right);
+      }
+    // the inner function base case is implicit
+  };
+  // call recursive function with initial parameter as 'this'.
+  recursiveFunction(this);
+  // return the result variable
 };
 
 /*
